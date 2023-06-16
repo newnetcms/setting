@@ -1,0 +1,25 @@
+{
+    "name": "newnetcms/setting",
+    "description": "Setting",
+    "require": {
+        "newnetcms/media": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Newnet\\Setting\\": "/src"
+        },
+        "files": [
+            "helpers/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Newnet\\Setting\\SettingServiceProvider"
+            ],
+            "aliases": {
+                "Setting": "Newnet\\Setting\\Facade"
+            }
+        }
+    }
+}
