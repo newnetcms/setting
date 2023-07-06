@@ -14,6 +14,10 @@ abstract class SettingController extends Controller
         $setting = setting()->all();
         $item = json_decode(json_encode($setting));
 
+        if (!$item) {
+            $item = new \stdClass();
+        }
+
         return view($this->view, compact('item'));
     }
 
