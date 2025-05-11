@@ -3,6 +3,7 @@
 namespace Newnet\Setting;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Route;
 use Newnet\Module\Support\BaseModuleServiceProvider;
 use Newnet\Setting\Contracts\SettingInterface;
 use Newnet\Setting\Models\Setting as SettingModel;
@@ -23,6 +24,8 @@ class SettingServiceProvider extends BaseModuleServiceProvider
     public function boot()
     {
         parent::boot();
+
+        Route::mixin(new SettingRouteMethods);
 
         $this->registerBladeDirectives();
     }
