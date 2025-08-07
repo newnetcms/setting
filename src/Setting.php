@@ -53,7 +53,7 @@ class Setting implements SettingInterface
     {
         $this->load();
 
-        return Arr::get($this->data, $name) ?: $default;
+        return Arr::get($this->data, $name) ?? $default;
     }
 
     public function set($name, $value)
