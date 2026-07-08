@@ -15,3 +15,4 @@ AdminMenu::addItem(__('core::menu.setting.index'), [
     'icon' => 'fas fa-cog',
     'order' => 1,
 ]);
+

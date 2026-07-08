@@ -14,6 +14,8 @@ class SettingServiceProvider extends BaseModuleServiceProvider
 {
     public function register()
     {
+        parent::register();
+
         $this->app->singleton(SettingRepositoryInterface::class, function () {
             return new SettingRepository(new SettingModel);
         });
