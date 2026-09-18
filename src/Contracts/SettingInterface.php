@@ -39,4 +39,11 @@ interface SettingInterface
      * @return mixed
      */
     public function forget($name);
+
+    /**
+     * (Re)load settings data from storage.
+     * @param bool $force reload even if already loaded
+     * @return void
+     */
+    public function load($force = false);
 }
