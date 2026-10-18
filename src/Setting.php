@@ -60,6 +60,10 @@ class Setting implements SettingInterface
     {
         $this->load();
 
+        // Giữ giá trị gốc (chưa json_encode/serialize) để cập nhật cache $this->data bên dưới —
+        // $this->data phải luôn khớp dữ liệu đã parseReadData() (xem get()/has()).
+        $original = $value;
+
         $type = gettype($value);
         switch ($type) {
             case 'array':
@@ -92,6 +96,13 @@ class Setting implements SettingInterface
             $setting->clearMediaGroup();
             $setting->attachMedia($media);
         }
+
+        // Cập nhật cache trong bộ nhớ ngay sau khi ghi: thiếu bước này thì has($name) ở lượt set()
+        // kế tiếp trong CÙNG request/process vẫn thấy dữ liệu cũ (chưa có $name), nên set() lần 2 cho
+        // cùng key lại chạy nhánh create() thay vì updateByName() — tạo dòng trùng name trong bảng
+        // settings (ví dụ: ghi 2 key trong một vòng lặp, hoặc setting() rồi setting() lại trong cùng
+        // request MCP).
+        Arr::set($this->data, $name, $original);
 
         return $setting;
     }
